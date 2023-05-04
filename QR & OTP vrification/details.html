@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Member Details</title>
+    <link rel="stylesheet" href="style.css"></style>
+  </head>
+  <body>
+    <h1>Member Details</h1>
+
+    <p>Name: <span id="name"></span></p>
+    <p>Age: <span id="age"></span></p>
+    <!-- <p>Public Key: <span id="publicKey"></span></p> -->
+    <!-- <p>OTP: <span id="otp"></span></p> -->
+    
+    <button onclick="logout()">Proceed to voting</button>
+  </body>
+  <script>
+
+  // Get member details from local storage
+const memberData = JSON.parse(localStorage.getItem('members'));
+console.log(memberData);
+
+// Get the current user's mobile number from the URL query parameter
+const urlParams = new URLSearchParams(window.location.search);
+const mobileNumber = urlParams.get('mobileNumber');
+console.log(urlParams);
+// Find the member object for the current user
+const currentUser = memberData.find(member => member.mobileNumber === mobileNumber);
+console.log(currentUser);
+// Get the DOM elements
+const nameElement = document.getElementById('name');
+const ageElement = document.getElementById('age');
+// const publicKeyElement = document.getElementById('publicKey');
+// const otpElement = document.getElementById('otp');
+
+// Update the DOM elements with the member details
+nameElement.textContent = currentUser.name;
+ageElement.textContent = currentUser.age;
+// publicKeyElement.textContent = currentUser.publicKey;
+otpElement.textContent = currentUser.otp;
+
+// Function to handle the logout button click
+function logout() {
+  // Redirect to the home page
+  window.location.href = 'http://localhost:3000/';
+}
+  
+  </script>
+</html>
